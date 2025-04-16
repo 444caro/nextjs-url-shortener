@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import checkUrl from "@/app/lib/checkUrl";
 import createShortenedUrl from "@/app/lib/createShortenedUrl";
 
+const BASE_URL = "https://mp-5-omega-two.vercel.app/";
+
 const Container = styled.div`
   font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
   max-width: 90%;
@@ -22,13 +24,15 @@ const Label = styled.label`
   color: rgb(51,51,51);
   font-size: calc(7px + 1.5vw);
   font-weight: bold;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
 `;
 
 const Input = styled.input`
   padding: 10px;
   padding-right: 50px;
   font-size: 16px;
+  margin-top: 10px;
 `;
 
 const Button = styled.button`
@@ -76,6 +80,18 @@ const ResultLink = styled.a`
   }
 `;
 
+const UrlRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const Base = styled.span`
+  color: rgb(51,51,51);
+  font-size: calc(7px + 1.5vw);
+  margin-bottom: 6px;
+`;
+
 
 export default function UrlShortenerForm() {
     const [originalUrl, setOriginalUrl] = useState("");
@@ -112,7 +128,8 @@ export default function UrlShortenerForm() {
         <Container>
             <Form onSubmit={handleSubmit}>
                 <div>
-                    <Label> Original Url </Label>
+                    <Label> Original Url </Label> 
+                    <UrlRow>
                     <Input
                         type="text"
                         value={originalUrl}
@@ -120,16 +137,20 @@ export default function UrlShortenerForm() {
                         placeholder="https://example.com/super/duper/very/long/url"
                         required
                     />
+                    </UrlRow>
                 </div>
                 <div>
                     <Label> Custom Alias </Label>
-                    <Input
+                    <UrlRow>
+                        <Base>{BASE_URL}</Base>
+                        <Input
                         type="text"
                         value={aliasUrl}
                         onChange={(e) => setAliasUrl(e.target.value)}
                         placeholder="your-custom-alias"
                         required
-                    />
+                        />
+                    </UrlRow>
                 </div>
                 <Button type="submit">Shorten URL</Button>
             </Form>
@@ -137,8 +158,8 @@ export default function UrlShortenerForm() {
             {shortenedUrl && (
                 <ResultWrapper>
                     <ResultText> Your shortened URL: </ResultText>
-                    <ResultText><ResultLink href={`/${shortenedUrl}`} target="_blank" rel="noopener noreferrer">
-                        {`/${shortenedUrl}`}
+                    <ResultText><ResultLink href={`${BASE_URL}${shortenedUrl}`} target="_blank" rel="noopener noreferrer">
+                        {`${BASE_URL}${shortenedUrl}`}
                     </ResultLink></ResultText>
                 </ResultWrapper>
             )}
