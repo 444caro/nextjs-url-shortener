@@ -1,5 +1,4 @@
 "use server";
-import { Url } from "@/types";
 import getCollection, { URL_COLLECTION } from "@/db";
 
 export default async function getShortenedUrl(aliasUrl: string,): Promise<string|null> {

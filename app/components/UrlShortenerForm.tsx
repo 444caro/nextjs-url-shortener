@@ -95,11 +95,15 @@ export default function UrlShortenerForm() {
         try {
             const result = await createShortenedUrl(originalUrl, aliasUrl);
             setShortenedUrl(result.aliasUrl);
-        } catch (err: any) {
-            if (err.message === "Alias URL already exists") {
+        } catch (err: unknown) {
+            if (err instanceof Error){
+              if (err.message === "Alias URL already exists") {
                 setError("The provided alias URL already exists, please choose a different one");
-            } else {
+              } else {
                 setError("An error occurred while creating the shortened URL");
+              }
+            }else {
+              setError("An unknown error occurred");
             }
         }
     };
