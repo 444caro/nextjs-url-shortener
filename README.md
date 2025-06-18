@@ -31,7 +31,7 @@ This is a full-stack **URL shortener** application built with **Next.js 13 App R
 2. URL is validated on the server via `fetch()`
 3. If valid, it’s inserted into MongoDB (alias must be unique)
 4. A shortened link is displayed like:
-https://your-domain.com/myalias
+https://mp-5-omega-two.vercel.app/myalias
 5. Visiting that alias will redirect the user to the original long URL using server-side redirect logic in `[alias]/page.tsx`
 
 ---
