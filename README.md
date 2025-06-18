@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js URL Shortener
 
-## Getting Started
+This is a full-stack **URL shortener** application built with **Next.js 13 App Router**, **TypeScript**, **MongoDB**, and **styled-components**. It allows users to input long URLs, optionally define a custom alias, and receive a shortened, shareable link with server-side redirection.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Custom alias support for shortened URLs
+- URL validation before submission
+- Uses server actions (`"use server"`) for backend logic
+- MongoDB database integration via a reusable collection interface
+- Clean, responsive UI built with styled-components
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tech Stack
 
-## Learn More
+- [Next.js 13+](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [styled-components](https://styled-components.com/)
+- [MongoDB](https://www.mongodb.com/)
+- Server Actions for backend functionality (no API routes)
+- Custom client/server separation using `"use client"` and `"use server"`
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How It Works
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **User submits a long URL + optional custom alias**
+2. URL is validated on the server via `fetch()`
+3. If valid, it’s inserted into MongoDB (alias must be unique)
+4. A shortened link is displayed like:
+https://your-domain.com/myalias
+5. Visiting that alias will redirect the user to the original long URL using server-side redirect logic in `[alias]/page.tsx`
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
